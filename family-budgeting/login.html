@@ -12,36 +12,37 @@
 </head>
 <body>
     <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form action="process.php" method="POST">
-                <h1>Create Account</h1>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Name" required>
-                
-                <label for="email-signup">Email</label>
-                <input type="email" id="email-signup" name="email" placeholder="Email" required>
-                
-                <label for="password-signup">Password</label>
-                <input type="password" id="password-signup" name="password" placeholder="Password" required>
-                
-                <button type="submit">Sign Up</button>
-                <p class="error-message" id="signup-error">Password is not strong enough!</p>
-            </form>
-        </div>
-        <div class="form-container sign-in">
-            <form action="process.php" method="POST">
-                <h1>Sign In</h1>
-                <label for="email-signin">Email</label>
-                <input type="email" id="email-signin" name="email" placeholder="Email" required>
-                
-                <label for="password-signin">Password</label>
-                <input type="password" id="password-signin" name="password" placeholder="Password" required>
-                
-                <a href="#">Forgot Your Password?</a>
-                <p class="error-message" id="signin-error">Invalid password!</p>
-                <button type="submit">Sign In</button>
-            </form>
-        </div>
+        <!-- Sign Up Form -->
+<div class="form-container sign-up">
+    <form id="signup-form" method="POST">
+        <h1>Create Account</h1>
+        
+        <input type="text" id="name" name="name" placeholder="Name" required>
+        
+        <input type="email" id="email-signup" name="email" placeholder="Email" required>
+        
+        <input type="password" id="password-signup" name="password" placeholder="Password" required>
+        
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+
+<!-- Sign In Form -->
+<div class="form-container sign-in">
+    <form id="signin-form" method="POST">
+        <h1>Sign In</h1>
+        
+        <input type="email" id="email-signin" name="email" placeholder="Email" required>
+        
+        <input type="password" id="password-signin" name="password" placeholder="Password" required>
+        
+        <a href="#">Forgot Your Password?</a>
+        
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+
+        
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
@@ -70,6 +71,76 @@
         loginBtn.addEventListener('click', () => {
             container.classList.remove("active");
         });
+        
+      
+// Handle the Sign Up Form Submission
+const signupForm = document.getElementById('signup-form');
+signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();  // Prevent the form from submitting normally
+
+    const formData = new FormData(signupForm);  // Collect form data
+
+    try {
+        // Send the data using fetch
+        const response = await fetch('process.php', {
+            method: 'POST',
+            body: formData  // Send the form data to process.php
+        });
+
+        // Parse the response
+        const result = await response.json();
+
+        // Handle success or error based on the response status
+        if (result.status === 'success') {
+            alert(result.message);  // Display success message (e.g., account created)
+            
+            // Redirect to the sign-in page after account creation
+            window.location.href = "login.html";  // Adjust this URL to your actual login page
+
+        } else {
+            alert(result.message);  // Display error message (e.g., email already taken)
+        }
+
+    } catch (error) {
+        // Handle any fetch errors
+        alert('Error: ' + error.message);
+    }
+});
+
+// Handle the Sign In Form Submission
+const signinForm = document.getElementById('signin-form');
+signinForm.addEventListener('submit', async (e) => {
+    e.preventDefault();  // Prevent the form from submitting normally
+
+    const formData = new FormData(signinForm);  // Collect form data
+
+    try {
+        // Send the data using fetch
+        const response = await fetch('process.php', {
+            method: 'POST',
+            body: formData  // Send the form data to process.php
+        });
+
+        // Parse the response
+        const result = await response.json();
+
+        // Handle success or error based on the response status
+        if (result.status === 'success') {
+            alert(result.message);  // Display success message (e.g., login successful)
+            // Optionally, you can redirect the user to a dashboard or another page
+            window.location.href = "dashboard.html";
+        } else {
+            alert(result.message);  // Display error message (e.g., invalid email or password)
+        }
+
+    } catch (error) {
+        // Handle any fetch errors
+        alert('Error: ' + error.message);
+    }
+});
+
+
+
     </script>
 </body>
 </html>
