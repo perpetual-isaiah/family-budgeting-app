@@ -1,146 +1,47 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="login.css">
-    <title>Login Page</title>
-    <style>
-       
-    </style>
+    <title>Webpage Design</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" id="container">
-        <!-- Sign Up Form -->
-<div class="form-container sign-up">
-    <form id="signup-form" method="POST">
-        <h1>Create Account</h1>
-        
-        <input type="text" id="name" name="name" placeholder="Name" required>
-        
-        <input type="email" id="email-signup" name="email" placeholder="Email" required>
-        
-        <input type="password" id="password-signup" name="password" placeholder="Password" required>
-        
-        <button type="submit">Sign Up</button>
-    </form>
-</div>
 
-<!-- Sign In Form -->
-<div class="form-container sign-in">
-    <form id="signin-form" method="POST">
-        <h1>Sign In</h1>
-        
-        <input type="email" id="email-signin" name="email" placeholder="Email" required>
-        
-        <input type="password" id="password-signin" name="password" placeholder="Password" required>
-        
-        <a href="#">Forgot Your Password?</a>
-        
-        <button type="submit">Sign In</button>
-    </form>
-</div>
-
-        
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
-                    <button class="hidden" id="login">Sign In</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Let’s get started!</h1>
-                    <p>Register with your personal details to use all of site features</p>
-                    <button class="hidden" id="register">Sign Up</button>
-                </div>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">FamFunds</h2>
+                <!--<img src="aa.jpg" alt="FamFunds Logo" class="logo"> -->
             </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">SERVICE</a></li>
+                    <li><a href="#">DESIGN</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="#">HOW IT WORKS</a></li>
+                </ul>
+            </div>
+           
+        </div> 
+        <div class="content">
+            <h1>SECURE<br><span>TOMORROW!</span> 
+            <p class="par"></p>
+            TAKE CONTROL OF YOUR FAMILY'S FUTURE, ONE BUDGET AT A TIME               
+             <button class="cn">
+                <a href="login.html">Let's get started!</a>
+            </button>
+
+                 </div>
+                
+                </div>
+                </div>
+                    </div>
+                </div>
         </div>
-    </div>
-
-    <script>
-        const container = document.getElementById('container');
-        const registerBtn = document.getElementById('register');
-        const loginBtn = document.getElementById('login');
-
-        registerBtn.addEventListener('click', () => {
-            container.classList.add("active");
-        });
-
-        loginBtn.addEventListener('click', () => {
-            container.classList.remove("active");
-        });
         
-      
-// Handle the Sign Up Form Submission
-const signupForm = document.getElementById('signup-form');
-signupForm.addEventListener('submit', async (e) => {
-    e.preventDefault();  // Prevent the form from submitting normally
-
-    const formData = new FormData(signupForm);  // Collect form data
-
-    try {
-        // Send the data using fetch
-        const response = await fetch('process.php', {
-            method: 'POST',
-            body: formData  // Send the form data to process.php
-        });
-
-        // Parse the response
-        const result = await response.json();
-
-        // Handle success or error based on the response status
-        if (result.status === 'success') {
-            alert(result.message);  // Display success message (e.g., account created)
-            
-            // Redirect to the sign-in page after account creation
-            window.location.href = "login.html";  // Adjust this URL to your actual login page
-
-        } else {
-            alert(result.message);  // Display error message (e.g., email already taken)
-        }
-
-    } catch (error) {
-        // Handle any fetch errors
-        alert('Error: ' + error.message);
-    }
-});
-
-// Handle the Sign In Form Submission
-const signinForm = document.getElementById('signin-form');
-signinForm.addEventListener('submit', async (e) => {
-    e.preventDefault();  // Prevent the form from submitting normally
-
-    const formData = new FormData(signinForm);  // Collect form data
-
-    try {
-        // Send the data using fetch
-        const response = await fetch('process.php', {
-            method: 'POST',
-            body: formData  // Send the form data to process.php
-        });
-
-        // Parse the response
-        const result = await response.json();
-
-        // Handle success or error based on the response status
-        if (result.status === 'success') {
-            alert(result.message);  // Display success message (e.g., login successful)
-            // Optionally, you can redirect the user to a dashboard or another page
-            window.location.href = "dashboard.html";
-        } else {
-            alert(result.message);  // Display error message (e.g., invalid email or password)
-        }
-
-    } catch (error) {
-        // Handle any fetch errors
-        alert('Error: ' + error.message);
-    }
-});
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 
 
-
-    </script>
 </body>
 </html>
